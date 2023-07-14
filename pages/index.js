@@ -6,6 +6,7 @@ export default function Home() {
   const [board, setBoard] = useState([[0, 0, 0], [0, 0, 0], [0, 0, 0]]);
   // makes the board disabled after the game is over, preventing from editing the board.
   const [boardDisabled, setBoardDisabled] = useState(false);
+  const [result, setResult] = useState();
 
   function handleCellClick(rowIndex, colIndex) {
     console.warn(`clicked:${rowIndex}${colIndex}`);
@@ -22,24 +23,22 @@ export default function Home() {
       if (winner) {
         setBoard(curBoard);
         setBoardDisabled(true);
-        setTimeout(() => {
-          alert(winner);
-        }, 500);
+        setResult(winner);
         return;
       }
-
+      // computer's move
       // calculate next move and mark O
       // Play winning move
+      // checking 1st row and if the sum of the column values equals to -2, it says that we have an empty cell to win.so its finding that empty cell and setting the value to -1.
       if ((curBoard[0][0] + curBoard[0][1] + curBoard[0][2]) === -2) curBoard[0][curBoard[0].indexOf(0)] = -1;
       else if ((curBoard[1][0] + curBoard[1][1] + curBoard[1][2]) === -2) curBoard[1][curBoard[1].indexOf(0)] = -1;
       else if ((curBoard[2][0] + curBoard[2][1] + curBoard[2][2]) === -2) curBoard[2][curBoard[2].indexOf(0)] = -1;
+      // for columns and diagonals checks same thing but sets all of the cells to -1, since we are'nt sure about the value.  
       else if ((curBoard[0][0] + curBoard[1][0] + curBoard[2][0]) === -2) curBoard[0][0] = curBoard[1][0] = curBoard[2][0] = -1;
       else if ((curBoard[0][1] + curBoard[1][1] + curBoard[2][1]) === -2) curBoard[0][1] = curBoard[1][1] = curBoard[2][1] = -1;
       else if ((curBoard[0][2] + curBoard[1][2] + curBoard[2][2]) === -2) curBoard[0][2] = curBoard[1][2] = curBoard[2][2] = -1;
       else if ((curBoard[0][0] + curBoard[1][1] + curBoard[2][2]) === -2) curBoard[0][0] = curBoard[1][1] = curBoard[2][2] = -1;
       else if ((curBoard[0][2] + curBoard[1][1] + curBoard[2][0]) === -2) curBoard[0][2] = curBoard[1][1] = curBoard[2][0] = -1;
-
-
 
       // Block enemy win
       else if ((curBoard[0][0] + curBoard[0][1] + curBoard[0][2]) === 2) curBoard[0][curBoard[0].indexOf(0)] = -1;
@@ -95,9 +94,7 @@ export default function Home() {
       winner = didAnyoneWin(curBoard);
       if (winner) {
         setBoardDisabled(true);
-        setTimeout(() => {
-          alert(winner);
-        }, 500);
+        setResult(winner);
         return;
       }
     }
@@ -151,6 +148,9 @@ export default function Home() {
               )
             })
           }
+        </div>
+        <div>
+          {result}
         </div>
       </main >
     </>
