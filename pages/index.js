@@ -119,7 +119,7 @@ export default function Home() {
       || (curBoard[0][0] + curBoard[1][1] + curBoard[2][2]) === -3
       || (curBoard[0][2] + curBoard[1][1] + curBoard[2][0]) === -3)
       return 'Computer Wins!';
-
+    /* It checks for the value zero in each row and The indexOf() method returns the first index at which a given element can be found in the array, or -1 if it is not present. */
     const indexSum = curBoard.reduce((partial, row) => partial + row.indexOf(0), 0);
     if (indexSum === -3)
       return 'It\'s a DRAW!';
