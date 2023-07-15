@@ -38,6 +38,7 @@ ul {
 button {
   padding: 0.5rem 1rem;
   font-weight: bold;
+  background-color: lightgrey;
 }
 
 main {
@@ -48,9 +49,36 @@ main {
 }
 
 .cell {
-  border: 1px solid;
+  border: 1px solid white;
+  border-radius: 15px;
+  ;
 }
 
 .board {
   margin: 100px 200px;
+}
+
+button:hover {
+  background-color: aquamarine;
+}
+
+.title {
+  display: flex;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  justify-content: center;
+  padding-bottom: 30px;
+}
+
+.game-result {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  font-weight: 700;
+  color: green;
+  text-transform: uppercase;
+}
+
+.reset-btn {
+  border: 1px solid white;
+  border-radius: 15px;
 }

@@ -109,7 +109,7 @@ export default function Home() {
       || (curBoard[2][0] + curBoard[2][1] + curBoard[2][2]) === 3
       || (curBoard[0][0] + curBoard[1][1] + curBoard[2][2]) === 3
       || (curBoard[0][2] + curBoard[1][1] + curBoard[2][0]) === 3)
-      return 'X Wins';
+      return 'You Wins!';
     else if ((curBoard[0][0] + curBoard[1][0] + curBoard[2][0]) === -3
       || (curBoard[0][1] + curBoard[1][1] + curBoard[2][1]) === -3
       || (curBoard[0][2] + curBoard[1][2] + curBoard[2][2]) === -3
@@ -118,11 +118,17 @@ export default function Home() {
       || (curBoard[2][0] + curBoard[2][1] + curBoard[2][2]) === -3
       || (curBoard[0][0] + curBoard[1][1] + curBoard[2][2]) === -3
       || (curBoard[0][2] + curBoard[1][1] + curBoard[2][0]) === -3)
-      return 'O Wins';
+      return 'Computer Wins!';
 
     const indexSum = curBoard.reduce((partial, row) => partial + row.indexOf(0), 0);
     if (indexSum === -3)
-      return 'DRAW';
+      return 'It\'s a DRAW!';
+  }
+
+  function resetBoard() {
+    setBoard([[0, 0, 0], [0, 0, 0], [0, 0, 0]]);
+    setBoardDisabled(false);
+    setResult('');
   }
 
   return (
@@ -133,6 +139,7 @@ export default function Home() {
       </Head>
       <main>
         <div className="board d-flex flex-column flex-grow-1">
+          <h1 className='title'>Tic Tac Toe</h1>
           {
             board.map((row, rowIndex) => {
               // looping through each item in the array getting the row and the index
@@ -148,9 +155,10 @@ export default function Home() {
               )
             })
           }
-        </div>
-        <div>
-          {result}
+          <div className='game-result'>{result}
+          </div>
+          <div className='d-flex justify-content-end'>
+            <button className='reset-btn' type='button' onClick={resetBoard}>Reset</button></div>
         </div>
       </main >
     </>
